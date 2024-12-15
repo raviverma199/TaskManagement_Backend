@@ -25,11 +25,7 @@ exports.CreateUser = async (req, res) => {
 
     if (!ValidatePassword(password)) {
       // Validate the Password
-      return sendErrorResponse(
-        res,
-        400,
-        "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character."
-      );
+      return sendErrorResponse(res, 400, "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character.");
     }
 
     let isUserExist = await User.findOne({ email });
@@ -49,6 +45,8 @@ exports.CreateUser = async (req, res) => {
     return sendErrorResponse(res, 500, "Internal Server Error.");
   }
 };
+
+
 // Controller For Login The User
 exports.loginuser = async (req, res) => {
   try {
@@ -61,11 +59,7 @@ exports.loginuser = async (req, res) => {
 
     if (!ValidatePassword(password)) {
       // Validate the password
-      return sendErrorResponse(
-        res,
-        400,
-        "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character."
-      );
+      return sendErrorResponse(res, 400, "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character.");
     }
 
     let FindUser = await User.findOne({ email }); // Finding User
@@ -106,7 +100,7 @@ exports.loginuser = async (req, res) => {
     });
   } catch (error) {
     logger.error("Error occured in Login", error);
-    return sendErrorResponse(res, 500, "Internal Server Error.");
+    return sendErrorResponse(res, 500, "Internal Server Error."+error);
   }
 };
 

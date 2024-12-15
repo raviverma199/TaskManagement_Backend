@@ -3,21 +3,22 @@ const app = express();
 const Database = require("./dbconfig/dbconnection");
 const AuthRoute = require("./routes/authroute");
 const ProfileRoute = require("./routes/profileDataroute");
-const TaskRoute = require("./routes/taskroute")
-const RateLimit = require("express-rate-limit");
+const TaskRoute = require("./routes/taskroute");
+const helmet = require('helmet');
+
 Database();
+
 app.use(express.json());
-
-const limiter = RateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 2,
-  message: "Too many requests from this IP, please try again later.",
-});
-
-// app.use(limiter);
+app.use(helmet())
 
 app.use("/auth", AuthRoute);
-app.use("/api", ProfileRoute, TaskRoute);
+app.use("/api/profile", ProfileRoute);
+app.use("/api/task", TaskRoute);
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ msg: "Something Went Wrong" });
+});
 
 app
   .listen(3333, () => {

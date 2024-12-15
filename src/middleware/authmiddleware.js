@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
-const redis = require("redis");
-const client = redis.createClient();
 require("dotenv").config();
+const { sendErrorResponse } = require('../utils/helper')
 
 
 // Access Token for less period of time
@@ -20,7 +19,7 @@ const RefreshToken = (Payload, secret_Key) => {
     const refreshtoken = jwt.sign(Payload, secret_Key, { expiresIn: "7d" });
     return refreshtoken;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -58,7 +57,7 @@ const GetTokenData = async (token) => {
     );
     return decoded;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

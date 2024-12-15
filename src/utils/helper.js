@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const logger = require("../utils/ErrorHandler");
 
 // Function to sending Error Response
 const sendErrorResponse = (res, status, errorMessage) => {
@@ -7,7 +8,7 @@ const sendErrorResponse = (res, status, errorMessage) => {
 };
 
 // function to bcrypt the password
-async function BcryptPassword(password) {
+const BcryptPassword = async (password) => {
   try {
     const SaltRound = 10;
 
@@ -15,33 +16,33 @@ async function BcryptPassword(password) {
 
     return HashedPassword;
   } catch (error) {
-    console.log(error);
+    logger.error("Error occured while Bcrypt Password", error);
   }
-}
+};
 
 // Function to encrpyt the Password
-async function EncryptPassword(PlainPassword, HasedPassword) {
+const EncryptPassword = async (PlainPassword, HasedPassword) => {
   try {
     let EncryptPassword = await bcrypt.compare(PlainPassword, HasedPassword);
 
     return EncryptPassword;
   } catch (error) {
-    console.log(error);
+    logger.error("Error occured in Encrypt Task", error);
   }
-}
+};
 
 // Function to Validate the password
-function ValidatePassword(password) {
+const ValidatePassword = async (password) => {
   try {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return passwordRegex.test(password);
   } catch (error) {
-    console.log(error);
+    logger.error("Error occured in Validate password", error);
   }
-}
+};
 
-// Configure the transporter (you can use Gmail, SendGrid, etc.)
+// Configure the transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
