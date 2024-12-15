@@ -1,9 +1,12 @@
-const express = require('express');
+const express = require("express");
 const route = express.Router();
-const UserProfileData = require('../controller/userprofilecontroller');
-const { authenticate }  = require('../middleware/authmiddleware');
+const UserProfileData = require("../controller/userprofilecontroller");
+const { authenticate } = require("../middleware/authmiddleware");
 
-route.get('/GetUserProfile', authenticate, UserProfileData.GetUserProfile)
+
+// EndPoint to get the Profile Data
+route.get("/GetUserProfile", authenticate, UserProfileData.GetUserProfile);
+
 
 
 module.exports = route;

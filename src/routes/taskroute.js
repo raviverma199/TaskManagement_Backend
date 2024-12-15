@@ -17,7 +17,5 @@ route.delete("/DeleteTask", authenticate, authorizeRole(['manager','admin']), ta
 // Endpoint to View Task
 route.get('/ViewTask', authenticate, authorizeRole(['manager', 'admin', 'user']), taskController.ViewAssignTask);
 
-// Endpoint to view the analytics of task assignment
-route.get('/ViewTaskStats',authenticate, authorizeRole(['manager','admin']), analyticscontroller.GetTaskStats)
 
 module.exports = route;

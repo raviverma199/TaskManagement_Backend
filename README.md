@@ -1,22 +1,33 @@
-# TaskManagement_Backend
+# Task Management System - Backend
 
-The **TaskManagement_Backend** is a RESTful API for managing tasks and users. This documentation provides detailed steps to set up, run the application locally, an overview of API endpoints, and design decisions made during implementation.
+This repository contains the backend for the Task Management System. The backend is built using Node.js, Express, and MongoDB. It provides APIs for managing tasks, including user registration, authentication, and CRUD operations for tasks.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Setup and Running Locally](#setup-and-running-locally)
+- [Swagger Documentation](#swagger-documentation)
 
 ---
 
-## Setup
+## Installation
 
 ### Prerequisites
-- **Node.js** (v16+ recommended)
-- **npm** or **yarn**
-- **MongoDB** (local installation or a cloud-based instance such as MongoDB Atlas)
 
----
+Before getting started, ensure you have the following software installed:
 
-### Instructions
+- [Node.js](https://nodejs.org/) (version 16 or higher)
+- [npm](https://www.npmjs.com/) (Node Package Manager, included with Node.js)
+- [MongoDB](https://www.mongodb.com/) (local or cloud instance)
 
-#### 1. Clone the Repository
-Clone the repository to your local machine:
-```bash
-git clone https://github.com/raviverma199/TaskManagement_Backend.git
-cd TaskManagement_Backend
+### Steps to Install
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/task-management-system-backend.git
+   cd task-management-system-backend
+
+1. **API Documentation:**
+  
+    Check http://localhost:port_number/api-docs to get the full Information about Apis.
