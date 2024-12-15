@@ -28,6 +28,12 @@ Before getting started, ensure you have the following software installed:
    git clone https://github.com/raviverma199/TaskManagement_Backend.git
    cd task-management-system-backend
 
-1. **API Documentation:**
-  
-    Check http://localhost:port_number/api-docs to get the full Information about Apis.
+2. **Set Enviroment Variable:**
+
+   ```bash
+   Set env file with secret_key,DbConnString(mongodb://localhost:27017/task_management_db) and PORT (Default Port is 2020)
+
+3. **API Documention:**
+
+   ```bash
+   Check http://localhost:2020/api-docs for api documention.
