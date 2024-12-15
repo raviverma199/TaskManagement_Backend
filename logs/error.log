@@ -1,0 +1,11 @@
+2024-12-14 22:17:39 [ERROR]: TypeError: Cannot read properties of undefined (reading 'split')
+    at exports.GetUserProfile (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\src\controller\userprofilecontroller.js:7:44)
+    at Layer.handle [as handle_request] (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\node_modules\express\lib\router\route.js:149:13)
+    at C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\src\middleware\authmiddleware.js:39:5
+    at C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\node_modules\jsonwebtoken\verify.js:101:10)
+    at authenticate (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\src\middleware\authmiddleware.js:31:7)
+    at Layer.handle [as handle_request] (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\ADMIN\OneDrive\Desktop\Task management assignment\TaskManagement_Backend\node_modules\express\lib\router\route.js:149:13)
