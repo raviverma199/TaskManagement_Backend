@@ -23,7 +23,7 @@ exports.CreateUser = async (req, res) => {
       return sendErrorResponse(res, 400, "Invalid Email");
     }
 
-    if (!ValidatePassword(password)) {
+    if (!validator.isStrongPassword(password)) {
       // Validate the Password
       return sendErrorResponse(
         res,
