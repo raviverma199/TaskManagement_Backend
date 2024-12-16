@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const Database = require("./dbconfig/dbconnection");
 const AuthRoute = require("./routes/authroute");
 const ProfileRoute = require("./routes/profileDataroute");
 const TaskRoute = require("./routes/taskroute");
@@ -8,21 +7,35 @@ const Analytics = require("./routes/analyticsroute");
 const helmet = require("helmet");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./docs/swagger-config");
-require("dotenv").config();
-
-Database();
 
 app.use(express.json());
 
 // Serve Swagger API documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      // Specify allowed sources for scripts, styles, images
+      "script-src": ["'self'", "http://localhost:2020"],
+      "style-src": ["'self'", "http://localhost:2020"],
+      "img-src": ["'self'", "http://localhost:2020"],
+      "default-src": ["'self'"],
+    },
+  })
+);
 
-app.get("/", (req, res) => {
-  res.send(200);
+// header to prevent clickjacking attack
+app.use((req, res, next) => {
+  res.setHeader("X-Frame-Options", "DENY");
+  next();
 });
 
+// For cross-site-scripting attack
+app.use(helmet.xssFilter());
+
+// API ROUTES
 app.use("/api/auth", AuthRoute);
 app.use("/api/profile", ProfileRoute);
 app.use("/api/task", TaskRoute);
@@ -33,10 +46,4 @@ app.use((err, req, res, next) => {
   res.status(500).send({ msg: "Something Went Wrong" });
 });
 
-app
-  .listen(process.env.PORT || 2020, () => {
-    console.log("server is running on 2020");
-  })
-  .on("error", (err) => {
-    console.log("Error: " + err);
-  });
+module.exports = app;

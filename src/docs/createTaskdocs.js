@@ -483,3 +483,87 @@
 
 
 
+/**
+ * @swagger
+ * /api/stats/FilterRecord:
+ *   get:
+ *     summary: Search tasks based on various filter criteria
+ *     description: Allows users to search for tasks by status, priority, and due date.
+ *     tags: [Analytics]
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         description: The status of the task (e.g., "Completed", "Pending")
+ *         required: false
+ *         schema:
+ *           type: string
+ *           example: "Completed"
+ *       - in: query
+ *         name: priority
+ *         description: The priority of the task (e.g., "High", "Low", "Medium")
+ *         required: false
+ *         schema:
+ *           type: string
+ *           example: "High"
+ *       - in: query
+ *         name: dueDate
+ *         description: The due date of the task. Only tasks with due dates before or equal to the given date will be returned.
+ *         required: false
+ *         schema:
+ *           type: string
+ *           format: date
+ *           example: "2024-12-20"
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved filtered tasks
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 FilterData:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       status:
+ *                         type: string
+ *                       priority:
+ *                         type: string
+ *                       dueDate:
+ *                         type: string
+ *                         format: date
+ *                       description:
+ *                         type: string
+ *       404:
+ *         description: No tasks found matching the filter criteria
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "No tasks found matching your criteria."
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Something went wrong, please try again."
+ */

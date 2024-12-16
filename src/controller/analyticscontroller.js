@@ -2,6 +2,7 @@ const Task = require("../models/taskSchema");
 const logger = require("../utils/ErrorHandler");
 const { sendErrorResponse } = require("../utils/helper");
 const rateLimiterMiddleware = require("../middleware/ratelimiter");
+const mongoose = require("mongoose");
 
 exports.GetTaskStats = async (req, res) => {
   try {
@@ -48,13 +49,16 @@ exports.GetTaskStats = async (req, res) => {
   }
 };
 
-
 exports.GetManagerTaskAnalytics = async (req, res) => {
   try {
     const { id, role } = req?.user;
 
     if (role !== "manager") {
-      return sendErrorResponse(res, 403, "You need to be a manager to access this data.");
+      return sendErrorResponse(
+        res,
+        403,
+        "You need to be a manager to access this data."
+      );
     }
 
     if (!id) {
@@ -63,24 +67,32 @@ exports.GetManagerTaskAnalytics = async (req, res) => {
 
     const taskStats = await Task.aggregate([
       {
-        $match: { createdBy: id },
+        $match: { createdBy: new mongoose.Types.ObjectId(id) },
       },
       {
         $group: {
-          _id: "$createdBy", 
+          _id: "$createdBy",
           totalTasks: { $sum: 1 },
-          completedTasks: { $sum: { $cond: [{ $eq: ["$status", "completed"] }, 1, 0] } },
-          pendingTasks: { $sum: { $cond: [{ $eq: ["$status", "Pending"] }, 1, 0] } },
+          completedTasks: {
+            $sum: { $cond: [{ $eq: ["$status", "completed"] }, 1, 0] },
+          },
+          pendingTasks: {
+            $sum: { $cond: [{ $eq: ["$status", "Pending"] }, 1, 0] },
+          },
           overdueTasks: {
             $sum: {
               $cond: [
-                { $and: [{ $eq: ["$status", "Pending"] }, { $lt: ["$dueDate", new Date()] }] },
+                {
+                  $and: [
+                    { $eq: ["$status", "Pending"] },
+                    { $lt: ["$dueDate", new Date()] },
+                  ],
+                },
                 1,
                 0,
               ],
             },
           },
-          highPriority: { $sum: { $cond: [{ $eq: ["$priority", "High"] }, 1, 0] } }, 
         },
       },
       {
@@ -90,7 +102,6 @@ exports.GetManagerTaskAnalytics = async (req, res) => {
           completedTasks: 1,
           pendingTasks: 1,
           overdueTasks: 1,
-          highPriority: 1,
         },
       },
     ]);
@@ -112,8 +123,43 @@ exports.GetManagerTaskAnalytics = async (req, res) => {
       },
     });
   } catch (error) {
-    // Log the error if something goes wrong
     logger.error("Error occurred while fetching manager task analytics", error);
-    return sendErrorResponse(res, 500, "Something went wrong, please try again.");
+    return sendErrorResponse(res, 500, "Internal Server Error!");
+  }
+};
+
+exports.SearchTask = async (req, res) => {
+  try {
+    const { status, priority, dueDate } = req.query;
+    const filter = {};
+
+    if (status) {
+      filter.status = status;
+    }
+    if (priority) {
+      filter.priority = priority;
+    }
+    if (dueDate) {
+      filter.dueDate = { $lte: new Date(dueDate) };
+    }
+
+    if (Object.keys(filter).length === 0) {
+      return sendErrorResponse(res, 404, "No Data Found");
+    }
+
+    let FilterData = await Task.find(filter).sort({ dueDate: 1 });
+
+    if (FilterData.length === 0) {
+      return sendErrorResponse(
+        res,
+        404,
+        "No tasks found matching your criteria"
+      );
+    }
+
+    res.status(200).json({ FilterData });
+  } catch (error) {
+    logger.error("Error Occured while search Task:", error);
+    return sendErrorResponse(res, 500, "Internal Server Error");
   }
 };
