@@ -18,6 +18,10 @@ exports.CreateUser = async (req, res) => {
   try {
     let { username, email, role, password } = req.body;
 
+    if (!username || !email || !role || !password) {
+      return sendErrorResponse(res, 400, "All field are required");
+    }
+
     if (!validator.isEmail(email)) {
       // Validate the Email
       return sendErrorResponse(res, 400, "Invalid Email");
