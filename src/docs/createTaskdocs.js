@@ -54,7 +54,7 @@
  *               assignedTo:
  *                 type: string
  *                 description: "The user to whom the task is assigned"
- *                 example: "ObjectId"
+ *                 example: "ObjectId of role 'user'"
  *     responses:
  *       201:
  *         description: "Task created successfully"
@@ -150,11 +150,7 @@
  *               status:
  *                 type: string
  *                 description: "The current status of the task"
- *                 example: "In Progress"
- *               assignedTo:
- *                 type: string
- *                 description: "The user to whom the task is assigned"
- *                 example: "userId_12345"
+ *                 example: "Pending"
  *     responses:
  *       200:
  *         description: "Task updated successfully"

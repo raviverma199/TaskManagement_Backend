@@ -45,7 +45,7 @@ exports.CreateTask = async (req, res) => {
 // Update the Assigned Task
 exports.UpdateTask = async (req, res) => {
   try {
-    let { taskId, title, description, dueDate, priority, status, assignedTo } =
+    let { taskId, title, description, dueDate, priority, status } =
       req.body;
 
     if (!Types.ObjectId.isValid(taskId)) {
@@ -59,12 +59,10 @@ exports.UpdateTask = async (req, res) => {
         ...(description && { description }),
         ...(dueDate && { dueDate }),
         ...(priority && { priority }),
-        ...(status && { status }),
-        ...(assignedTo && { assignedTo }),
+        ...(status && { status })
       },
     };
 
-    console.log(req?.user?.role);
     rateLimiterMiddleware(req?.user?.role)(req, res, async () => {
       let UpdateData = await Task.findByIdAndUpdate(filter, update, {
         new: true,
