@@ -28,22 +28,35 @@ Before getting started, ensure you have the following software installed:
    git clone https://github.com/raviverma199/TaskManagement_Backend.git
    cd TaskManagement_Backend
 
-2. **After Clone the repository:**
+   ```
+
+2. **Install Dependencies:**
 
    ```bash
    npm install
 
-3. **Set Enviroment Variable:**
+   ```
+
+3. **Create a .env file in the root directory and add the following variables:**
 
    ```bash
-   Set env file with secret_key,DbConnString(mongodb://localhost:27017/task_management_db) and PORT (Default Port is 2020)
+   SECRET_KEY=your_secret_key
+   DB_CONN_STRING=mongodb://localhost:27017/task_management_db
+   PORT=2020 # Default port
 
-4. **After Setting the Enviroment Variable:**
+   ```
+
+4. **Run the following command:**
 
    ```bash
-   Start the server by (npm start) command.
+   npm start
 
-5. **API Documention:**
+   ```
+
+5. **Access API Documentation:**
 
    ```bash
-   Check http://localhost:2020/api-docs for api documention after starting the server on local.
+   After starting the server, visit the following URL to view the API documentation:
+   http://localhost:2020/api-docs
+
+   ```
