@@ -5,7 +5,7 @@ This repository contains the backend for the Task Management System — built wi
 ## Table of Contents
 
 - [Features](#Features)
-- [Tech Stack](#Tech Stack)
+- [Tech Stack](#Tech_Stack)
 - [Installation](#Installation)
 - [Running Locally](#Running_Locally)
 - [API Documentation (Swagger)](#API_Documentation)
@@ -42,7 +42,9 @@ This repository contains the backend for the Task Management System — built wi
 - npm
 - MongoDB (local or cloud instance)
 
+
 ### 🔧 Environment Variables
+
 **Create a .env file in the root directory and add the following variables:**
 
    ```bash
