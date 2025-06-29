@@ -1,26 +1,58 @@
 # Task Management System - Backend
 
-This repository contains the backend for the Task Management System. The backend is built using Node.js, Express, and MongoDB. It provides APIs for managing tasks, including user registration, authentication, and CRUD operations for tasks.
+This repository contains the backend for the Task Management System — built with Node.js, Express, and MongoDB. It includes features like user authentication, task creation, updating, deletion, and filtering. The project also integrates CI/CD using GitHub Actions for automated testing and deployment.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Setup and Running Locally](#setup-and-running-locally)
-- [Swagger Documentation](#swagger-documentation)
+- [Features](#Features)
+- [Tech Stack](#Tech_Stack)
+- [Installation](#Installation)
+- [Running Locally](#Running_Locally)
+- [API Documentation (Swagger)](#API_Documentation)
+- [CI/CD Integration](#CI/CD)
 
 ---
 
-## Installation
+### ✅ Features
 
-### Prerequisites
+- 🔐 User Registration & Login (JWT Authentication)
+- 🧾 CRUD Operations for Tasks
+- 📅 Task filtering (by status, date, etc.)
+- 🛡️ Protected routes with middleware
+- 🧪 Integrated with GitHub Actions (CI/CD)
+- 🧾 API documentation using Swagger
 
-Before getting started, ensure you have the following software installed:
 
-- [Node.js](https://nodejs.org/) (version 16 or higher)
-- [npm](https://www.npmjs.com/) (Node Package Manager, included with Node.js)
-- [MongoDB](https://www.mongodb.com/) (local or cloud instance)
+### 🛠 Tech Stack
 
-### Steps to Install
+- Backend: Node.js, Express.js
+- Database: MongoDB (Mongoose)
+- Authentication: JWT
+- Documentation: Swagger UI
+- CI/CD: GitHub Actions
+
+
+### 📦 Installation
+
+## Prerequisites
+
+- Make sure you have the following installed:
+
+- Node.js (v16 or higher)
+- npm
+- MongoDB (local or cloud instance)
+
+
+### 🔧 Environment Variables
+
+**Create a .env file in the root directory and add the following variables:**
+
+   ```bash
+   SECRET_KEY=your_secret_key
+   DB_CONN_STRING=mongodb://localhost:27017/task_management_db
+   PORT=2020 # Default port
+
+   ```
 
 1. **Clone the repository:**
 
@@ -37,26 +69,26 @@ Before getting started, ensure you have the following software installed:
 
    ```
 
-3. **Create a .env file in the root directory and add the following variables:**
-
-   ```bash
-   SECRET_KEY=your_secret_key
-   DB_CONN_STRING=mongodb://localhost:27017/task_management_db
-   PORT=2020 # Default port
-
-   ```
-
-4. **Run the following command:**
+3. **Run the following command:**
 
    ```bash
    npm start
 
    ```
 
-5. **Access API Documentation:**
+4. **Access API Documentation:**
 
    ```bash
    After starting the server, visit the following URL to view the API documentation:
    http://localhost:2020/api-docs
 
    ```
+
+### ⚙️ CI/CD Integration
+This project uses GitHub Actions for:
+
+- Running tests automatically on push
+- Lint checks
+- Ensuring successful builds before deployment
+
+- You can find the workflow in .github/workflows/ci.yml.

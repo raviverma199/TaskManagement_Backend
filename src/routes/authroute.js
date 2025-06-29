@@ -19,4 +19,8 @@ route.post("/logout", authenticate, authcontroller.logout);
 
 route.post("/RefreshToken", authenticate, authcontroller.refreshToken);
 
+route.get('/', async (req, res) => {
+  res.send(200);
+});
+
 module.exports = route;
