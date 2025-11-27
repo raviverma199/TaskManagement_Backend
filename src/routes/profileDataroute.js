@@ -5,7 +5,7 @@ const { authenticate } = require("../middleware/authmiddleware");
 
 
 // EndPoint to get the Profile Data
-route.get("/GetUserProfile", authenticate, UserProfileData.GetUserProfile);
+route.get("/GetUserProfile", UserProfileData.GetUserProfile);
 
 
 

@@ -41,7 +41,7 @@ const TaskSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now,
-  },
+  }
 });
 
 const Task = mongoose.model("tasks", TaskSchema);
